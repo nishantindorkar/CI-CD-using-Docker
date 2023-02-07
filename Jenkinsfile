@@ -44,7 +44,7 @@ pipeline {
     // }
     stage('docker-compose in master') {
       steps{
-        sh "docker run -d -p 8003:8080 nishantindorkar/samplewebapp:latest"
+        sh "docker run -d -p 8003:8080 samplewebapp:latest"
       }
     }
     // stage('Run Docker container on remote hosts') {
