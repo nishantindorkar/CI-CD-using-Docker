@@ -23,7 +23,7 @@ pipeline {
         // sh 'sudo apt-get install -y docker.io'
         // sh 'sudo apt-get install -y docker-compose'
         sh 'sudo docker build -t samplewebapp:latest .' 
-        //sh 'sudo docker tag samplewebapp nishantindorkar/samplewebapp:latest'
+        sh 'sudo docker tag samplewebapp nishantindorkar/samplewebapp:latest'
         //sh 'docker tag samplewebapp nishantindorkar/samplewebapp:$BUILD_NUMBER'
         echo 'Build Image Completed'
         }
@@ -34,6 +34,7 @@ pipeline {
           echo 'Login Completed'
           //docker push nishantindorkar/jenkins-cicd
           //sh 'sudo docker tag samplewebapp:latest nishantindorkar/jenkins-cicd:samplewebapp:latest'
+          //sh 'sudo docker tag samplewebapp:latest nishantindorkar/samplewebapp:latest'
           sh 'sudo docker push nishantindorkar/samplewebapp:latest'
           //sh 'sudo docker push nishantindorkar/samplewebapp:latest'
           //sh  'sudo docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
@@ -41,9 +42,9 @@ pipeline {
         }
       }    
     }
-    stage('Run Docker container on Jenkins Agent') {
+    stage('docker-compose in master') {
       steps{
-        sh "docker run -d -p 8003:8080 nishantindorkar/samplewebapp"
+        sh "docker run -d -p 8003:8080 nishantindorkar/samplewebapp:latest"
       }
     }
     // stage('Run Docker container on remote hosts') {
