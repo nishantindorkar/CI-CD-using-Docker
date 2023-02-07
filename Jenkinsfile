@@ -5,7 +5,7 @@ pipeline {
   //   jdk 'jdk11'
   // }
   environment {     
-    DOCKERHUB_CREDENTIALS= credentials('dockersecrettext')     
+    DOCKERHUB_CREDENTIALS= credentials('docker')     
   }
   stages {
     stage('checkout') {
