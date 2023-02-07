@@ -28,20 +28,20 @@ pipeline {
         echo 'Build Image Completed'
         }
     }
-    stage('login to Docker'){
-      steps{
-        withDockerRegistry(credentialsId: 'docker-hub', url: "") {
-          echo 'Login Completed'
-          //docker push nishantindorkar/jenkins-cicd
-          //sh 'sudo docker tag samplewebapp:latest nishantindorkar/jenkins-cicd:samplewebapp:latest'
-          //sh 'sudo docker tag samplewebapp:latest nishantindorkar/samplewebapp:latest'
-          sh 'sudo docker push nishantindorkar/samplewebapp:latest'
-          //sh 'sudo docker push nishantindorkar/samplewebapp:latest'
-          //sh  'sudo docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
-          echo 'Push Image Completed'
-        }
-      }    
-    }
+    // stage('login to Docker'){
+    //   steps{
+    //     withDockerRegistry(credentialsId: 'docker-hub', url: "") {
+    //       echo 'Login Completed'
+    //       //docker push nishantindorkar/jenkins-cicd
+    //       //sh 'sudo docker tag samplewebapp:latest nishantindorkar/jenkins-cicd:samplewebapp:latest'
+    //       //sh 'sudo docker tag samplewebapp:latest nishantindorkar/samplewebapp:latest'
+    //       sh 'sudo docker push nishantindorkar/samplewebapp:latest'
+    //       //sh 'sudo docker push nishantindorkar/samplewebapp:latest'
+    //       //sh  'sudo docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
+    //       echo 'Push Image Completed'
+    //     }
+    //   }    
+    // }
     stage('docker-compose in master') {
       steps{
         sh "docker run -d -p 8003:8080 nishantindorkar/samplewebapp:latest"
