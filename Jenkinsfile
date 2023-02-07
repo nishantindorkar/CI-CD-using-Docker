@@ -4,9 +4,6 @@ pipeline {
   //   maven 'Maven 3.9.0'
   //   jdk 'jdk11'
   // }
-  environment {     
-    DOCKERHUB_CREDENTIALS= credentials('docker')     
-  }
   stages {
     stage('checkout') {
       steps {                 
@@ -33,7 +30,7 @@ pipeline {
     }
     stage('login to Docker') {
       steps{
-        withDockerRegistry(credentialsId: 'docker-hub', url: "https://hub.docker.com/r/nishantindorkar/jenkins-cicd") {
+        withDockerRegistry(credentialsId: 'docker-hub', url: "") {
           echo 'Login Completed'
           sh 'sudo docker push nishantindorkar/samplewebapp:latest'
           //sh  'sudo docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
