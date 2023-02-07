@@ -12,29 +12,29 @@ pipeline {
     }            
     stage('Execute Maven') {
       steps { 
-        sh 'sudo apt-get update -y'
-        sh 'sudo apt-get install maven -y'           
+        // sh 'sudo apt-get update -y'
+        // sh 'sudo apt-get install maven -y'           
         sh 'mvn package'             
       }
     }
     stage('Docker Build and Tag') {
       steps {
-        sh 'sudo apt update -y'
-        sh 'sudo apt install -y docker.io'
-        sh 'sudo apt install -y docker-compose'
+        sh 'sudo apt-get update -y'
+        sh 'sudo apt-get install -y docker.io'
+        sh 'sudo apt-get install -y docker-compose'
         sh 'docker build -t samplewebapp:latest .' 
-        sh 'docker tag samplewebapp nikhilnidhi/samplewebapp:latest'
-                  //sh 'docker tag samplewebapp nikhilnidhi/samplewebapp:$BUILD_NUMBER'
+        sh 'docker tag samplewebapp nishantindorkar/samplewebapp:latest'
+                  //sh 'docker tag samplewebapp nishantindorkar/samplewebapp:$BUILD_NUMBER'
         }
     }
-    // stage('Publish image to Docker Hub') {
-    //   steps {
-    //     withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-    //     sh  'docker push nikhilnidhi/samplewebapp:latest'
-    //       //  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 
-    //     }
-    //   }
-    // }
+    stage('Publish image to Docker Hub') {
+      steps {
+        withDockerRegistry(credentialsId: 'dockercontainer', url: 'https://hub.docker.com/u/nishantindorkar'){
+        sh  'docker push nishantindorkar/samplewebapp:latest'
+          //  sh  'docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
+        }
+      }
+    }
     stage('Run Docker container on Jenkins Agent') {
       steps{
         sh "docker run -d -p 8003:8080 nikhilnidhi/samplewebapp"
