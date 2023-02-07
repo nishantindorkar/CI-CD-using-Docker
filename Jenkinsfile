@@ -22,8 +22,8 @@ pipeline {
         sh 'sudo apt-get update -y'
         sh 'sudo apt-get install -y docker.io'
         sh 'sudo apt-get install -y docker-compose'
-        sh 'docker build -t samplewebapp:latest .' 
-        sh 'docker tag samplewebapp nishantindorkar/samplewebapp:latest'
+        sh 'sudo docker build -t samplewebapp:latest .' 
+        sh 'sudo docker tag samplewebapp nishantindorkar/samplewebapp:latest'
                   //sh 'docker tag samplewebapp nishantindorkar/samplewebapp:$BUILD_NUMBER'
         }
     }
