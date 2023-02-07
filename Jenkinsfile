@@ -34,7 +34,7 @@ pipeline {
           echo 'Login Completed'
           //docker push nishantindorkar/jenkins-cicd
           //sh 'sudo docker tag samplewebapp:latest nishantindorkar/jenkins-cicd:samplewebapp:latest'
-          sh 'sudo docker push nishantindorkar/jenkins-cicd:samplewebapp:latest'
+          sh 'sudo docker push nishantindorkar/jenkins-cicd/samplewebapp:latest'
           //sh 'sudo docker push nishantindorkar/samplewebapp:latest'
           //sh  'sudo docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
           echo 'Push Image Completed'
