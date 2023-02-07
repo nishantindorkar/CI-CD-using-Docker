@@ -4,6 +4,9 @@ pipeline {
   //   maven 'Maven 3.9.0'
   //   jdk 'jdk11'
   // }
+  environment {     
+    DOCKERHUB_CREDENTIALS= credentials('dockersecrettext')     
+  }
   stages {
     stage('checkout') {
       steps {                 
@@ -25,14 +28,18 @@ pipeline {
         sh 'sudo docker build -t samplewebapp:latest .' 
         sh 'sudo docker tag samplewebapp nishantindorkar/samplewebapp:latest'
         //sh 'docker tag samplewebapp nishantindorkar/samplewebapp:$BUILD_NUMBER'
+        echo 'Build Image Completed'
         }
     }
     stage('Publish image to Docker Hub') {
       steps {
-        withCredentials([string(credentialsId: 'dockersecrettext', variable: 'dockerconatiner')]) {
+        //withCredentials([string(credentialsId: 'dockersecrettext', variable: 'dockerconatiner')]) {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                 
+	      echo 'Login Completed'
         sh  'sudo docker push nishantindorkar/samplewebapp:latest'
-        //  sh  'docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
-        }
+        //sh  'docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
+        echo 'Push Image Completed'
+        //}
       }
     }
     stage('Run Docker container on Jenkins Agent') {
