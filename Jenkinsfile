@@ -19,19 +19,19 @@ pipeline {
     }
     stage('Docker Build and Tag') {
       steps {
-        sh 'sudo apt-get update -y'
-        sh 'sudo apt-get install -y docker.io'
-        sh 'sudo apt-get install -y docker-compose'
+        // sh 'sudo apt-get update -y'
+        // sh 'sudo apt-get install -y docker.io'
+        // sh 'sudo apt-get install -y docker-compose'
         sh 'sudo docker build -t samplewebapp:latest .' 
         sh 'sudo docker tag samplewebapp nishantindorkar/samplewebapp:latest'
-                  //sh 'docker tag samplewebapp nishantindorkar/samplewebapp:$BUILD_NUMBER'
+        //sh 'docker tag samplewebapp nishantindorkar/samplewebapp:$BUILD_NUMBER'
         }
     }
     stage('Publish image to Docker Hub') {
       steps {
-        withDockerRegistry(credentialsId: 'dockercontainer', url: 'https://hub.docker.com/u/nishantindorkar'){
+        withDockerRegistry(credentialsId: 'secretkey', url: 'https://hub.docker.com/u/nishantindorkar'){
         sh  'docker push nishantindorkar/samplewebapp:latest'
-          //  sh  'docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
+        //  sh  'docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
         }
       }
     }
