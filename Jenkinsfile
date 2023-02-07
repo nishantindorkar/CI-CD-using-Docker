@@ -34,13 +34,13 @@ pipeline {
     stage('Publish image to Docker Hub') {
       steps {
         //withCredentials([string(credentialsId: 'dockersecrettext', variable: 'dockerconatiner')]) {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login --username nishantindorkar --password-stdin'                 
-	      //withDockerRegistry(credentialsId: 'secretkey', url: 'https://hub.docker.com/repository/docker/nishantindorkar/jenkins-cicd'){
+        //sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login --username nishantindorkar --password-stdin'                 
+	      withDockerRegistry(credentialsId: 'docker', url: 'https://hub.docker.com/repository/docker/nishantindorkar/jenkins-cicd'){
         echo 'Login Completed'
         sh  'sudo docker push nishantindorkar/samplewebapp:latest'
         //sh  'docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
         echo 'Push Image Completed'
-        //}
+        }
       }
     }
     stage('Run Docker container on Jenkins Agent') {
