@@ -10,7 +10,9 @@ pipeline {
         }
     }            
     stage('Execute Maven') {
-      steps {            
+      steps { 
+        sh 'sudo apt-get update -y'
+        sh 'sudo apt-get install maven -y'           
         sh 'mvn package'             
       }
     }
