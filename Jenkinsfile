@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('checkout') {
       steps {                 
-        git branch: 'master', url: 'git@github.com:nishantindorkar/CI-CD-using-Docker.git'
+        git credentialsId: 'one', url: 'git@github.com:nishantindorkar/CI-CD-using-Docker.git'
         }
     }            
     stage('Execute Maven') {
