@@ -33,7 +33,7 @@ pipeline {
     }
     stage('login to Docker') {
       steps{
-        withDockerRegistry(credentialsId: 'secretkey') {
+        withDockerRegistry(credentialsId: 'secretkey', url: "") {
           echo 'Login Completed'
         }
       }
