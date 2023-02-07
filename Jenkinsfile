@@ -31,18 +31,26 @@ pipeline {
         echo 'Build Image Completed'
         }
     }
-    stage('Publish image to Docker Hub') {
-      steps {
-        //withCredentials([string(credentialsId: 'dockersecrettext', variable: 'dockerconatiner')]) {
-        //sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login --username nishantindorkar --password-stdin'                 
-	      withDockerRegistry(credentialsId: 'docker', url: 'https://hub.docker.com/repository/docker/nishantindorkar/jenkins-cicd/general'){
-        echo 'Login Completed'
-        sh  'sudo docker push nishantindorkar/samplewebapp:latest'
-        //sh  'docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
-        echo 'Push Image Completed'
+    stage('login to Docker') {
+      steps{
+        withDockerRegistry(credentialsId: 'secretkey') {
+          echo 'Login Completed'
         }
       }
+    
     }
+    // stage('Publish image to Docker Hub') {
+    //   steps {
+    //     //withCredentials([string(credentialsId: 'dockersecrettext', variable: 'dockerconatiner')]) {
+    //     //sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login --username nishantindorkar --password-stdin'                 
+	  //     withDockerRegistry(credentialsId: 'docker', url: 'https://hub.docker.com/repository/docker/nishantindorkar/jenkins-cicd/general'){
+    //     echo 'Login Completed'
+    //     sh  'sudo docker push nishantindorkar/samplewebapp:latest'
+    //     //sh  'docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
+    //     echo 'Push Image Completed'
+    //     }
+    //   }
+    // }
     // stage('Run Docker container on Jenkins Agent') {
     //   steps{
     //     sh "docker run -d -p 8003:8080 nikhilnidhi/samplewebapp"
