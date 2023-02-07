@@ -23,7 +23,7 @@ pipeline {
         // sh 'sudo apt-get install -y docker.io'
         // sh 'sudo apt-get install -y docker-compose'
         sh 'sudo docker build -t samplewebapp:latest .' 
-        sh 'sudo docker tag samplewebapp nishantindorkar/samplewebapp:latest'
+        //sh 'sudo docker tag samplewebapp nishantindorkar/samplewebapp:latest'
         //sh 'docker tag samplewebapp nishantindorkar/samplewebapp:$BUILD_NUMBER'
         echo 'Build Image Completed'
         }
@@ -34,7 +34,7 @@ pipeline {
           echo 'Login Completed'
           //docker push nishantindorkar/jenkins-cicd
           //sh 'sudo docker tag samplewebapp:latest nishantindorkar/jenkins-cicd:samplewebapp:latest'
-          sh 'sudo docker push nishantindorkar/jenkins-cicd/samplewebapp:latest'
+          sh 'sudo docker push nishantindorkar/samplewebapp:latest'
           //sh 'sudo docker push nishantindorkar/samplewebapp:latest'
           //sh  'sudo docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
           echo 'Push Image Completed'
