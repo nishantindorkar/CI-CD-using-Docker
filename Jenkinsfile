@@ -33,9 +33,9 @@ pipeline {
     }
     stage('login to Docker') {
       steps{
-        withDockerRegistry(credentialsId: 'docker-hub', url: "") {
+        withDockerRegistry(credentialsId: 'docker-hub', url: "https://hub.docker.com/r/nishantindorkar/jenkins-cicd") {
           echo 'Login Completed'
-          sh  'sudo docker push nishantindorkar/samplewebapp:latest'
+          sh 'sudo docker push nishantindorkar/samplewebapp:latest'
           //sh  'sudo docker push nishantindorkar/samplewebapp:$BUILD_NUMBER' 
           echo 'Push Image Completed'
         }
